@@ -150,4 +150,4 @@ for filename in os.listdir('./cogs'):
 
 #===RUN-TOKEN===
 
-bot.run("Nzg5MzkxMzAyMzU3ODExMjAw.X9xX8A.51KcHsdYyxqiyAGviPRPO0yppAo")
+bot.run("Nzg5MzkxMzAyMzU3ODExMjAw.X9xX8A.POdgbzvNOMdFdsNPrfChOvGjNlk")
