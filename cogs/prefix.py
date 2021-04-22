@@ -1,4 +1,3 @@
-import discord
 import json
 from discord.ext import commands
 
@@ -7,7 +6,7 @@ class SetPrefix(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
     
-    #===SET-PREFIX-COMMAND===
+    #===SET CUSTOME PREFIX===
 
     @commands.command(aliases=['Setprefix','sp','prefix'])
     async def setprefix(self, ctx, prefix = None):
@@ -22,9 +21,9 @@ class SetPrefix(commands.Cog):
 
             await ctx.send(f'The prefix is now: {prefix}')
 
-    #===CURRENT-PREFIX===
+    #===CURRENT PREFIX===
 
-    @commands.command(aliases=['Getprefix'])
+    @commands.command(aliases=['currentprefix','Getprefix'])
     async def getprefix(self, ctx):
         with open("prefixes.json", "r") as f:
             data = json.loads(f.read())

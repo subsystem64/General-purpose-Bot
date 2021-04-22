@@ -5,29 +5,31 @@ class Help(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    #===MAIN-HELP-MENU===
+    #===MAIN HELP MENU===
 
     @commands.group(invoke_without_command = True, aliases=['Help'])
     async def help(self, ctx):
         author =  ctx.message.author
 
         embed = discord.Embed(
-        title="Help", 
+        title="Help :question:", 
         description="Available commands for system86. Do **&help <command>** for more information on a command", 
         colour = discord.Colour.purple()
         )
         embed.set_thumbnail(url = ctx.guild.me.avatar_url)
-        embed.add_field(name = 'Utilities (Misc.) :tools:', value = 'flipacoin, roll, ask, welcome, hi', inline=True)
+        embed.add_field(name = 'Utilities (Misc.) :tools:', value = 'flipacoin, roll, ask, welcome, hi, getprefix', inline=True)
         embed.add_field(name = 'Music :notes:', value = 'join, leave, play, pause, resume, volume, skip, nowplaying, queue, clearqueue, jumpqueue', inline=True)
-        embed.add_field(name = 'Moderation', value = 'kick, ban, unban, clear, mute, unmute, addbanword, removebanword', inline=True)
+        embed.add_field(name = 'Moderation', value = 'kick, ban, unban, purge, mute, unmute', inline=True)
         embed.add_field(name = 'Search APIs :mag:', value = 'youtube, wikisearch, wiki', inline=True)
         embed.add_field(name = 'Translate :globe_with_meridians:', value = 'translate, langlist, detectlang', inline=True)
-        embed.add_field(name = 'Settings :gear:', value = 'setprefix, getprefix, uptime', inline=True)
-        embed.add_field(name = 'Cogs Management', value = 'load, unload, reload', inline=True)
+        embed.add_field(name = 'Settings :gear:', value = 'setprefix, autowelcome, autoroleadd, autoroleremove, addbanword, removebanword', inline=True)
+        embed.add_field(name = 'Debug :lady_beetle:', value = 'load, unload, reload, ping, botstats, shutdown, uptime', inline=True)
 
         await ctx.send(author.mention, embed = embed) 
 
-    #===SUB-HELP-MENUS===
+    #===SUB HELP MENUS===
+
+    #utility commands
 
     @help.command()
     async def flipacoin(self, ctx):
@@ -54,7 +56,7 @@ class Help(commands.Cog):
     @help.command()
     async def ask(self, ctx):
         embed = discord.Embed(
-        title="ask", 
+        title="ask :question:", 
         description="Ask me a question!", 
         colour = discord.Colour.gold()
         )
@@ -83,6 +85,19 @@ class Help(commands.Cog):
         embed.add_field(name = '**Syntax**', value = '&hi', inline=False)
         embed.add_field(name = '**Aliases**', value = 'Hi', inline=True)
         await ctx.send(embed = embed)
+
+    @help.command()
+    async def getprefix(self, ctx):
+        embed = discord.Embed(
+        title="getprefix", 
+        description="Returns current bot prefix for the server", 
+        colour = discord.Colour.gold()
+        )
+        embed.add_field(name = '**Syntax**', value = '&getprefix', inline=False)
+        embed.add_field(name = '**Aliases**', value = 'currentprefix', inline=True)
+        await ctx.send(embed = embed)
+
+    #moderation commands
 
     @help.command()
     async def kick(self, ctx):
@@ -149,6 +164,85 @@ class Help(commands.Cog):
         embed.add_field(name = '**Aliases**', value = 'clear, pg, clr', inline=True)
         await ctx.send(embed = embed)
 
+    #search api commands
+
+    @help.command()
+    async def youtube(self, ctx):
+        embed = discord.Embed(
+        title="youtube", 
+        description="Performs a YouTube search query. Type **next** or **prev** to scroll through results, **exit** to exit search", 
+        colour = discord.Colour.gold()
+        )
+        embed.add_field(name = '**Syntax**', value = '&youtube <search_query>', inline=False)
+        embed.add_field(name = '**Aliases**', value = 'yt', inline=True)
+        await ctx.send(embed = embed)
+
+    @help.command()
+    async def wikisearch(self, ctx):
+        embed = discord.Embed(
+        title="wikisearch :books:", 
+        description="Returns a list of articles matching search request", 
+        colour = discord.Colour.gold()
+        )
+        embed.add_field(name = '**Syntax**', value = '&wikisearch <search_query>', inline=False)
+        embed.add_field(name = '**Aliases**', value = 'ws', inline=True)
+        await ctx.send(embed = embed)
+
+    @help.command()
+    async def wiki(self, ctx):
+        embed = discord.Embed(
+        title="wiki :books:", 
+        description="Shows preview of an article", 
+        colour = discord.Colour.gold()
+        )
+        embed.add_field(name = '**Syntax**', value = '&wiki <article_title>', inline=False)
+        embed.add_field(name = '**Aliases**', value = 'wk', inline=True)
+        await ctx.send(embed = embed)
+
+#settings commands
+
+    @help.command()
+    async def setprefix(self, ctx):
+        embed = discord.Embed(
+        title="setprefix", 
+        description="Change the bot prefix for current server", 
+        colour = discord.Colour.gold()
+        )
+        embed.add_field(name = '**Syntax**', value = '&setprefix <custom_prefix>', inline=False)
+        embed.add_field(name = '**Aliases**', value = 'sp, prefix', inline=True)
+        await ctx.send(embed = embed)
+
+    @help.command()
+    async def autowelcome(self, ctx):
+        embed = discord.Embed(
+        title="autowelcome :wave:", 
+        description="Turns auto-welcome On/Off. By default it is set to **false**", 
+        colour = discord.Colour.gold()
+        )
+        embed.add_field(name = '**Syntax**', value = '&autowelcome <boolean_value>', inline=False)
+        await ctx.send(embed = embed)
+
+    @help.command()
+    async def autoroleadd(self, ctx):
+        embed = discord.Embed(
+        title="autoroleadd", 
+        description="Adds a role to be given on member join event", 
+        colour = discord.Colour.gold()
+        )
+        embed.add_field(name = '**Syntax**', value = '&autoroleadd <role_name>', inline=False)
+        await ctx.send(embed = embed)
+
+    @help.command()
+    async def autoroleremove(self, ctx):
+        embed = discord.Embed(
+        title="autoroleremove", 
+        description="Removes a role from auto-role listing", 
+        colour = discord.Colour.gold()
+        )
+        embed.add_field(name = '**Syntax**', value = '&autoroleremove <role_name>', inline=False)
+        embed.add_field(name = '**Aliases**', value = 'autorolerm', inline=True)
+        await ctx.send(embed = embed)
+
     @help.command()
     async def addbanword(self, ctx):
         embed = discord.Embed(
@@ -170,59 +264,7 @@ class Help(commands.Cog):
         embed.add_field(name = '**Aliases**', value = 'rmbanword', inline=True)
         await ctx.send(embed = embed)
 
-    @help.command()
-    async def wikisearch(self, ctx):
-        embed = discord.Embed(
-        title="wikisearch", 
-        description="Returns a list of articles matching search request", 
-        colour = discord.Colour.gold()
-        )
-        embed.add_field(name = '**Syntax**', value = '&wikisearch <search_query>', inline=False)
-        embed.add_field(name = '**Aliases**', value = 'ws', inline=True)
-        await ctx.send(embed = embed)
-
-    @help.command()
-    async def wiki(self, ctx):
-        embed = discord.Embed(
-        title="wiki", 
-        description="Shows preview of an article", 
-        colour = discord.Colour.gold()
-        )
-        embed.add_field(name = '**Syntax**', value = '&wiki <article_title>', inline=False)
-        embed.add_field(name = '**Aliases**', value = 'wk', inline=True)
-        await ctx.send(embed = embed)
-
-    @help.command()
-    async def setprefix(self, ctx):
-        embed = discord.Embed(
-        title="setprefix", 
-        description="Change the bot prefix for current server", 
-        colour = discord.Colour.gold()
-        )
-        embed.add_field(name = '**Syntax**', value = '&setprefix <custom_prefix>', inline=False)
-        embed.add_field(name = '**Aliases**', value = 'sp, prefix', inline=True)
-        await ctx.send(embed = embed)
-
-    @help.command()
-    async def getprefix(self, ctx):
-        embed = discord.Embed(
-        title="getprefix", 
-        description="Returns current bot prefix for the server", 
-        colour = discord.Colour.gold()
-        )
-        embed.add_field(name = '**Syntax**', value = '&getprefix', inline=False)
-        embed.add_field(name = '**Aliases**', value = 'currentprefix', inline=True)
-        await ctx.send(embed = embed)
-
-    @help.command()
-    async def uptime(self, ctx):
-        embed = discord.Embed(
-        title="uptime :hourglass:", 
-        description="Returns bot uptime", 
-        colour = discord.Colour.gold()
-        )
-        embed.add_field(name = '**Syntax**', value = '&uptime', inline=False)
-        await ctx.send(embed = embed)
+    #debug commands
 
     @help.command()
     async def load(self, ctx):
@@ -253,6 +295,48 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&reload <extension_name>', inline=False)
         await ctx.send(embed = embed)
+
+    @help.command()
+    async def botstats(self, ctx):
+        embed = discord.Embed(
+        title="botstats :bar_chart:", 
+        description="Shows current server statistics", 
+        colour = discord.Colour.gold()
+        )
+        embed.add_field(name = '**Syntax**', value = '&botstats', inline=False)
+        await ctx.send(embed = embed)
+
+    @help.command()
+    async def ping(self, ctx):
+        embed = discord.Embed(
+        title="ping", 
+        description="Returns latency and response time", 
+        colour = discord.Colour.gold()
+        )
+        embed.add_field(name = '**Syntax**', value = '&ping', inline=False)
+        await ctx.send(embed = embed)
+
+    @help.command()
+    async def shutdown(self, ctx):
+        embed = discord.Embed(
+        title="shutdown", 
+        description="Logs off", 
+        colour = discord.Colour.gold()
+        )
+        embed.add_field(name = '**Syntax**', value = '&shutdown', inline=False)
+        await ctx.send(embed = embed)
+
+    @help.command()
+    async def uptime(self, ctx):
+        embed = discord.Embed(
+        title="uptime :hourglass:", 
+        description="Returns bot uptime", 
+        colour = discord.Colour.gold()
+        )
+        embed.add_field(name = '**Syntax**', value = '&uptime', inline=False)
+        await ctx.send(embed = embed)
+
+    #music commands
 
     @help.command()
     async def join(self, ctx):
@@ -370,6 +454,8 @@ class Help(commands.Cog):
         embed.add_field(name = '**Syntax**', value = '&jumpqueue <index> <new_index>', inline=False)
         embed.add_field(name = '**Aliases**', value = 'jq', inline=True)
         await ctx.send(embed = embed)
+
+    #translate commands
 
     @help.command()
     async def translate(self, ctx):

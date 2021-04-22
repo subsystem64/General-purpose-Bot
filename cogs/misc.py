@@ -1,7 +1,5 @@
-import discord
 import random
 from discord.ext import commands
-from random import randint
 
 
 class Misc(commands.Cog):
@@ -9,19 +7,19 @@ class Misc(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    #===WELCOME-COMMAND===
+    #===WELCOME COMMAND===
 
     @commands.command(pass_context=True, aliases=['Welcome'])
     async def welcome(self, ctx):
         await ctx.send('Welcome!')
 
-    #===HI-COMMAND===
+    #===HI COMMAND===
 
     @commands.command(pass_context=True, aliases=['Hi'])
     async def hi(self, ctx):
         await ctx.send('Hi :]')
 
-    #===ASK-QUESTION-COMMAND===
+    #===ASK COMMAND===
         
     @commands.command(pass_context=True, aliases=['Ask'])
     async def ask(self, ctx, question = None):
@@ -41,7 +39,7 @@ class Misc(commands.Cog):
             "tail"]
         await ctx.send("{}".format(random.choice(variable))) 
 
-    #===ROLL-DICE-COMMAND===
+    #===DICE ROLL===
 
     @commands.command(pass_context=True, aliases=['Roll'])
     async def roll(self, ctx, roll : str = None):

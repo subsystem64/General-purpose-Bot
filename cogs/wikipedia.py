@@ -9,14 +9,13 @@ class Wikipedia(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    #===WIKI-SEARCH-COMMAND===
+    #===WIKI SEARCH===
 
     @commands.command(pass_context=True, aliases=['Wikisearch','ws','WikiSearch', 'Ws'])
     async def wikisearch(self, ctx, *, request = None):
 
         if request == None:
-            author =  ctx.message.author
-    
+
             embed = discord.Embed(
             colour = discord.Colour.red()
             )
@@ -60,13 +59,12 @@ class Wikipedia(commands.Cog):
                 await ctx.send("An error occurred. Please try again.")
                 print(error)
 
-    #===WIKI-COMMAND===
+    #===WIKI===
 
     @commands.command(pass_context=True, aliases=['Wiki','wk'])
     async def wiki(self, ctx, *, request = None):
         if request == None:
-            author =  ctx.message.author
-    
+
             embed = discord.Embed(
             colour = discord.Colour.red()
             )

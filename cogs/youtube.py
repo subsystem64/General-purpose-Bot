@@ -7,19 +7,18 @@ class YouTube(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
         
-    #===YOUTUBE-SEARCH-COMMAND===
+    #===YOUTUBE SEARCH===
 
     @commands.command(aliases=['Youtube','yt','YouTube', 'Yt'])
     async def youtube(self, ctx, *, search = None):
         
         if search == None:
-            author =  ctx.message.author
-            
+ 
             embed = discord.Embed(
             colour = discord.Colour.red()
             )
             embed.set_author(name = 'YouTube Search')
-            embed.add_field(name = '&youtube', value = 'Starts a YouTube search query. Type **next** or **prev** to scroll through results, **exit** to exit search', inline=False)
+            embed.add_field(name = '&youtube', value = 'Starts a YouTube search query (&youtube <search_query>). type **next** or **prev** to scroll through results, **exit** to exit search', inline=False)
             await ctx.send(ctx.message.author.mention, embed = embed)
         else:
             query_string = urllib.parse.urlencode({'search_query': search})

@@ -1,5 +1,5 @@
   
-import functools, asyncio, discord, json, os, string, googletrans
+import functools, string, googletrans
 from cogs import DisplayName, Message
 from discord.ext import commands
 

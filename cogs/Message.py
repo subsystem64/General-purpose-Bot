@@ -1,5 +1,4 @@
-import asyncio, discord, textwrap, random, math, os
-from   discord.ext import commands
+import discord, textwrap, random, math, os
 
 def setup(bot):
     # Not a cog

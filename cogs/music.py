@@ -1,10 +1,9 @@
-from discord.ext import commands
 import discord
 import asyncio
 import youtube_dl
 import logging
 import math
-from urllib import request
+from discord.ext import commands
 
 YTDL_OPTS = {
     "default_search": "ytsearch",
@@ -105,6 +104,8 @@ class Music(commands.Cog):
             self.states[guild.id] = GuildState()
             return self.states[guild.id]
 
+    #===JOIN VOICE CHANNEL===
+
     @commands.command(aliases=['Join'])
     async def join(self, ctx):
         voice_state = ctx.author.voice
@@ -114,14 +115,17 @@ class Music(commands.Cog):
         await channel.connect()
         await ctx.message.add_reaction("✅")
         await ctx.send("**Connected to voice channel**")
+    
+    #===LEAVE VOICE CHANNEL===
 
     @commands.command(aliases=['disconnect', 'Disconnect', 'Leave'])
     async def leave(self, ctx):
-        guild = ctx.message.guild
         voice_client = ctx.voice_client
         await voice_client.disconnect()
         await ctx.message.add_reaction("✅")
         await ctx.send("**Disconnected from voice channel**")
+
+    #===RESUME/PAUSE===
 
     @commands.command(aliases=["resume", "p"])
     @commands.guild_only()
@@ -139,6 +143,8 @@ class Music(commands.Cog):
             client.resume()
         else:
             client.pause()
+
+    #===VOLUME CONROL===
 
     @commands.command(aliases=["vol", "v"])
     @commands.guild_only()
@@ -163,6 +169,8 @@ class Music(commands.Cog):
 
         state.volume = float(volume) / 100.0
         client.source.volume = state.volume  # update the AudioSource's volume to match
+
+    #===SKIP===
 
     @commands.command()
     @commands.guild_only()
@@ -224,6 +232,8 @@ class Music(commands.Cog):
 
         client.play(source, after=after_playing)
 
+    #===NOWPLAYING===
+
     @commands.command(aliases=["np"])
     @commands.guild_only()
     @commands.check(audio_playing)
@@ -232,6 +242,8 @@ class Music(commands.Cog):
         state = self.get_state(ctx.guild)
         message = await ctx.send("", embed=state.now_playing.get_embed())
         await self._add_reaction_controls(message)
+
+    #===QUEUE===
 
     @commands.command(aliases=["q", "playlist"])
     @commands.guild_only()
@@ -253,6 +265,8 @@ class Music(commands.Cog):
         else:
             return "The play queue is empty."
 
+    #===CLEAR QUEUE===
+
     @commands.command(aliases=["cq"])
     @commands.guild_only()
     @commands.check(audio_playing)
@@ -262,6 +276,8 @@ class Music(commands.Cog):
         state = self.get_state(ctx.guild)
         state.playlist = []
         await ctx.message.add_reaction("✅")
+
+    #===JUMP QUEUE===
 
     @commands.command(aliases=["jq"])
     @commands.guild_only()
@@ -277,6 +293,8 @@ class Music(commands.Cog):
             await ctx.send(self._queue_text(state.playlist))
         else:
             raise commands.CommandError("You must use a valid index.")
+
+    #===PLAY===
 
     @commands.command(brief="Plays audio from <url>.")
     @commands.guild_only()

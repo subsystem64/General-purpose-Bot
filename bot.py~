@@ -1,12 +1,12 @@
 import discord
 import os
 import json
-from discord import Intents
+import re
 from discord.ext import commands
 from discord.ext.commands import NotOwner
 #from alive import alive
 
-#===GET PREFIX FUNCTION===
+#===GET-PREFIX-FUNCTION===
 
 
 def get_prefix(bot, message):
@@ -14,8 +14,8 @@ def get_prefix(bot, message):
 		with open('prefixes.json', 'r') as f:
 			prefixes = json.load(f)
 		return prefixes[str(message.guild.id)]
-	except KeyError:  #If KeyError is returned (Unable to find matching entry in json)
-		#insert the data to json and return the default prefix
+	except KeyError:  # if the code above failed and raise KeyError code below will executed
+		#insert the data to json, and the return the default prefix
 		with open('prefixes.json', 'r') as f:
 			prefixes = json.load(f)
 
@@ -23,28 +23,24 @@ def get_prefix(bot, message):
 
 		with open('prefixes.json', 'w') as f:
 			json.dump(prefixes, f, indent=4)
-		return "&" 
+		return "&"  # or you can repeat the process of getting the prefix
 
-#===Intents===
 
-intents = Intents.all()
-
-bot = commands.Bot(command_prefix=get_prefix, intents = intents)
+bot = commands.Bot(command_prefix=get_prefix)
 bot.remove_command('help')
 
-#===DISCORD STATUS===
+#===DISCORD-STATUS===
+
 
 @bot.event
 async def on_ready():
 	await bot.change_presence(activity=discord.Game(name="&help 🦜"))
 	print("logged in")
 
-#===SENDs PREFIX ON PING===
+#===SEND-PREFIX-ON-PING===
 
 @bot.event
 async def on_message(message):
-    if message.mention_everyone:
-        return
     if bot.user.mentioned_in(message):
         with open("prefixes.json", "r") as f:
             data = json.loads(f.read())
@@ -57,11 +53,10 @@ async def on_message(message):
     await bot.process_commands(message)
 
 
-#===ADDS GUILD ENTRY TO JSON===
+#===MANIPULATE-PREFIXES.JSON===
 
 @bot.event
 async def on_guild_join(guild):
-    #creates default prefix entry
 	with open('prefixes.json', 'r') as f:
 		prefixes = json.load(f)
 
@@ -69,7 +64,7 @@ async def on_guild_join(guild):
 
 	with open('prefixes.json', 'w') as f:
 		json.dump(prefixes, f, indent=4)
-    #creates empty word filter entry
+
 	with open('bannedwords.json', 'r') as f:
 		words = json.load(f)
 
@@ -77,28 +72,11 @@ async def on_guild_join(guild):
 
 	with open('bannedwords.json', 'w') as f:
 		json.dump(words, f, indent=4)
-    #creates default autowelcome entry
-	with open('autowelcome.json', 'r') as f:
-		words = json.load(f)
 
-	words[str(guild.id)] = "false"
 
-	with open('autowelcome.json', 'w') as f:
-		json.dump(words, f, indent=4)
-    #creates empty autorole entry
-	with open('autorole.json', 'r') as f:
-		words = json.load(f)
-
-	words[str(guild.id)] = []
-
-	with open('autorole.json', 'w') as f:
-		json.dump(words, f, indent=4)
-
-#===REMOVES GUILD ENTRY IN JSON===
 
 @bot.event
 async def on_guild_remove(guild):
-    #removes prefix setting
 	with open('prefixes.json', 'r') as f:
 		prefixes = json.load(f)
 
@@ -107,7 +85,6 @@ async def on_guild_remove(guild):
 	with open('prefixes.json', 'w') as f:
 		json.dump(prefixes, f, indent=4)
 
-    #removes word filter setting
 	with open('bannedwords.json', 'r') as f:
 		words = json.load(f)
 
@@ -116,25 +93,8 @@ async def on_guild_remove(guild):
 	with open('bannedwords.json', 'w') as f:
 		json.dump(words, f, indent=4)
 
-    #removes autowelcome setting
-	with open('autowelcome.json', 'r') as f:
-		words = json.load(f)
 
-	words.pop(str(guild.id))
-
-	with open('autowelcome.json', 'w') as f:
-		json.dump(words, f, indent=4)
-    #removes autorole setting
-	with open('autorole.json', 'r') as f:
-		words = json.load(f)
-
-	words.pop(str(guild.id))
-
-	with open('autorole.json', 'w') as f:
-		json.dump(words, f, indent=4)
-
-
-#===COG CONTROLS===
+#===COG-CONTROLS===
 
 
 @bot.command()
@@ -159,7 +119,7 @@ async def reload(ctx, extension):
 	await ctx.send(f'cogs.{extension} has reloaded.')
 
 
-#===COG CONTROL PERMISSION ERROR HANDLER===
+#===PERMISSION-ERROR-HANDLER===
 
 
 @load.error
@@ -184,10 +144,10 @@ for filename in os.listdir('./cogs'):
 	if filename.endswith('.py'):
 		bot.load_extension(f'cogs.{filename[:-3]}')
 
-#===KEEP ALIVE===
+#===KEEP-ALIVE===
 
 #alive()
 
-#===BOT TOKEN===
+#===RUN-TOKEN===
 
-bot.run("Nzg5MzkxMzAyMzU3ODExMjAw.X9xX8A.y7fu1GpvKLPAKgODVZNYJdxYTQk")
+bot.run("")
