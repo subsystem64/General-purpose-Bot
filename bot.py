@@ -190,4 +190,4 @@ for filename in os.listdir('./cogs'):
 
 #===BOT TOKEN===
 
-bot.run("Nzg5MzkxMzAyMzU3ODExMjAw.X9xX8A.y7fu1GpvKLPAKgODVZNYJdxYTQk")
+bot.run("")
