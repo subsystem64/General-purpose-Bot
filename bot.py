@@ -11,7 +11,7 @@ from discord.ext.commands import NotOwner
 
 def get_prefix(bot, message):
 	try:
-		with open('prefixes.json', 'r') as f:
+		with open('./configs/prefixes.json', 'r') as f:
 			prefixes = json.load(f)
 		return prefixes[str(message.guild.id)]
 	except KeyError:  #If KeyError is returned (Unable to find matching entry in json)
@@ -46,7 +46,7 @@ async def on_message(message):
     if message.mention_everyone:
         return
     if bot.user.mentioned_in(message):
-        with open("prefixes.json", "r") as f:
+        with open("./configs/prefixes.json", "r") as f:
             data = json.loads(f.read())
             guildID = str(message.guild.id)
             prefix = data[guildID]
@@ -62,36 +62,36 @@ async def on_message(message):
 @bot.event
 async def on_guild_join(guild):
     #creates default prefix entry
-	with open('prefixes.json', 'r') as f:
+	with open('./configs/prefixes.json', 'r') as f:
 		prefixes = json.load(f)
 
 	prefixes[str(guild.id)] = '&'
 
-	with open('prefixes.json', 'w') as f:
+	with open('./configs/prefixes.json', 'w') as f:
 		json.dump(prefixes, f, indent=4)
     #creates empty word filter entry
-	with open('bannedwords.json', 'r') as f:
+	with open('./configs/bannedwords.json', 'r') as f:
 		words = json.load(f)
 
 	words[str(guild.id)] = []
 
-	with open('bannedwords.json', 'w') as f:
+	with open('./configs/bannedwords.json', 'w') as f:
 		json.dump(words, f, indent=4)
     #creates default autowelcome entry
-	with open('autowelcome.json', 'r') as f:
+	with open('./configs/autowelcome.json', 'r') as f:
 		words = json.load(f)
 
 	words[str(guild.id)] = "false"
 
-	with open('autowelcome.json', 'w') as f:
+	with open('./configs/autowelcome.json', 'w') as f:
 		json.dump(words, f, indent=4)
     #creates empty autorole entry
-	with open('autorole.json', 'r') as f:
+	with open('./configs/autorole.json', 'r') as f:
 		words = json.load(f)
 
 	words[str(guild.id)] = []
 
-	with open('autorole.json', 'w') as f:
+	with open('./configs/autorole.json', 'w') as f:
 		json.dump(words, f, indent=4)
 
 #===REMOVES GUILD ENTRY IN JSON===
@@ -99,38 +99,38 @@ async def on_guild_join(guild):
 @bot.event
 async def on_guild_remove(guild):
     #removes prefix setting
-	with open('prefixes.json', 'r') as f:
+	with open('./configs/prefixes.json', 'r') as f:
 		prefixes = json.load(f)
 
 	prefixes.pop(str(guild.id))
 
-	with open('prefixes.json', 'w') as f:
+	with open('./configs/prefixes.json', 'w') as f:
 		json.dump(prefixes, f, indent=4)
 
     #removes word filter setting
-	with open('bannedwords.json', 'r') as f:
+	with open('./configs/bannedwords.json', 'r') as f:
 		words = json.load(f)
 
 	words.pop(str(guild.id))
 
-	with open('bannedwords.json', 'w') as f:
+	with open('./configs/bannedwords.json', 'w') as f:
 		json.dump(words, f, indent=4)
 
     #removes autowelcome setting
-	with open('autowelcome.json', 'r') as f:
+	with open('./configs/autowelcome.json', 'r') as f:
 		words = json.load(f)
 
 	words.pop(str(guild.id))
 
-	with open('autowelcome.json', 'w') as f:
+	with open('./configs/autowelcome.json', 'w') as f:
 		json.dump(words, f, indent=4)
     #removes autorole setting
-	with open('autorole.json', 'r') as f:
+	with open('./configs/autorole.json', 'r') as f:
 		words = json.load(f)
 
 	words.pop(str(guild.id))
 
-	with open('autorole.json', 'w') as f:
+	with open('./configs/autorole.json', 'w') as f:
 		json.dump(words, f, indent=4)
 
 

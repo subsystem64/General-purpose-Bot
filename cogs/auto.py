@@ -16,10 +16,10 @@ class auto(commands.Cog):
         if value == None:
             await ctx.send('Pass values true/false to enable or disable auto-welcome on member join. This setting is **Disabled** by default')
         else:
-            with open('autowelcome.json', 'r') as f:
+            with open('./configs/autowelcome.json', 'r') as f:
                 data = json.load(f)
             data[str(ctx.guild.id)] = value.lower()
-            with open('autowelcome.json','w') as f:
+            with open('./configs/autowelcome.json','w') as f:
                 json.dump(data, f, indent = 4)
 
             await ctx.send(f'Auto-welcome: {value}')
@@ -28,7 +28,7 @@ class auto(commands.Cog):
 
     @commands.Cog.listener()
     async def on_member_join(self, member):
-        with open("autowelcome.json") as f:
+        with open("./configs/autowelcome.json") as f:
             data = json.load(f)
             trueorfalse = data[str(member.guild.id)]
             if trueorfalse == 'true':
@@ -40,7 +40,7 @@ class auto(commands.Cog):
             if trueorfalse == 'false':
                 return
 
-        with open("autorole.json") as f:
+        with open("./configs/autorole.json") as f:
             data = json.load(f)
             roles = data[str(member.guild.id)]
             if roles == None:
@@ -57,7 +57,7 @@ class auto(commands.Cog):
     async def autoroleadd(self, ctx, value = None):
         if value == None:
             await ctx.send('Please provide a role to add to auto-role listing')
-        with open('autorole.json', 'r+') as f:
+        with open('./configs/autorole.json', 'r+') as f:
             data = json.load(f)
             role = data[str(ctx.guild.id)]
             if value in role:
@@ -65,7 +65,7 @@ class auto(commands.Cog):
                 await ctx.send("Specified role is already set to be auto-roled")
             if discord.utils.get(ctx.guild.roles, name=value):
                 role.append(value)
-                with open('autorole.json','r+') as f:
+                with open('./configs/autorole.json','r+') as f:
                     data = json.load(f)
                     data[str(ctx.guild.id)] = role
                     f.seek(0)
@@ -81,12 +81,12 @@ class auto(commands.Cog):
     async def autoroleremove(self, ctx, value = None):
         if value == None:
             await ctx.send('Please provide a role to remove from auto-role listing')
-        with open('autorole.json', 'r+') as f:
+        with open('./configs/autorole.json', 'r+') as f:
             data = json.load(f)
             role = data[str(ctx.guild.id)]
             if value in role:
                 role.remove(value)
-                with open('autorole.json', 'r+') as f:
+                with open('./configs/autorole.json', 'r+') as f:
                     data = json.load(f)
                     data[str(ctx.guild.id)] = role
                     f.seek(0)

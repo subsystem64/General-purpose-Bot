@@ -13,10 +13,10 @@ class SetPrefix(commands.Cog):
         if prefix == None:
             await ctx.send('Change the bot prefix for current server (&setprefix <custom_prefix>).')
         else:
-            with open('prefixes.json', 'r') as f:
+            with open('./configs/prefixes.json', 'r') as f:
                 prefixes = json.load(f)
             prefixes[str(ctx.guild.id)] = prefix
-            with open('prefixes.json','w') as f:
+            with open('./configs/prefixes.json','w') as f:
                 json.dump(prefixes, f, indent = 4)
 
             await ctx.send(f'The prefix is now: {prefix}')
@@ -25,7 +25,7 @@ class SetPrefix(commands.Cog):
 
     @commands.command(aliases=['currentprefix','Getprefix'])
     async def getprefix(self, ctx):
-        with open("prefixes.json", "r") as f:
+        with open("./configs/prefixes.json", "r") as f:
             data = json.loads(f.read())
             guildID = str(ctx.guild.id)
             prefix = data[guildID]

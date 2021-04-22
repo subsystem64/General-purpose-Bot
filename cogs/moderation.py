@@ -158,7 +158,7 @@ class Moderation(commands.Cog):
     @commands.has_permissions(administrator = True)
     @commands.bot_has_permissions(manage_messages = True)
     async def addbanword(self, ctx, word):
-        with open('bannedwords.json', 'r+') as f:
+        with open('./configs/bannedwords.json', 'r+') as f:
             data = json.load(f)
             worddata = data[str(ctx.guild.id)]
             if word.lower() in worddata:
@@ -166,7 +166,7 @@ class Moderation(commands.Cog):
                 await ctx.send("Specified word is already banned in this server")
             else:
                 worddata.append(word.lower())
-                with open('bannedwords.json','r+') as f:
+                with open('./configs/bannedwords.json','r+') as f:
                     data = json.load(f)
                     data[str(ctx.guild.id)] = worddata
                     f.seek(0)
@@ -181,12 +181,12 @@ class Moderation(commands.Cog):
     @commands.has_permissions(administrator = True)
     @commands.bot_has_permissions(manage_messages = True)
     async def removebanword(self, ctx, word):
-        with open('bannedwords.json', 'r+') as f:
+        with open('./configs/bannedwords.json', 'r+') as f:
             data = json.load(f)
             worddata = data[str(ctx.guild.id)]
             if word.lower() in worddata:
                 worddata.remove(word.lower())
-                with open('bannedwords.json', 'r+') as f:
+                with open('./configs/bannedwords.json', 'r+') as f:
                     data = json.load(f)
                     data[str(ctx.guild.id)] = worddata
                     f.seek(0)
@@ -217,7 +217,7 @@ class Moderation(commands.Cog):
 
     @commands.Cog.listener()
     async def on_message(self, message):
-        with open("bannedwords.json") as f:
+        with open("./configs/bannedwords.json") as f:
             data = json.load(f)
         messageAuthor = message.author
         worddata = data[str(message.guild.id)]

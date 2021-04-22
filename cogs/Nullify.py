@@ -1,13 +1,13 @@
 import re, discord
 
 def setup(bot):
-	# This module isn't actually a cog
+	# not a cog
     return
 
 def clean(string, deaden_links = False, ctx = None):
     # A helper function to strip out user and role mentions
     if deaden_links:
-        # Check if we have a url link
+        # Check if it is a url link
         matches = re.finditer(r"(http|ftp|https)://([\w_-]+(?:(?:\.[\w_-]+)+))([\w.,@?^=%&:/~+#-]*[\w@?^=%&/~+#-])?", string)
         i_adjust = 0
         for m in matches:
@@ -28,7 +28,7 @@ def escape_all(string, mentions = True, markdown = True):
 def resolve_mentions(string, ctx = None, escape = True, show_mentions = True):
     guild = ctx if isinstance(ctx,discord.Guild) else ctx.guild if hasattr(ctx,"guild") else None
     if guild:
-        # We have a guild - let's try to resolve!
+        # resolve guild 
         matches = re.finditer(r"\<\@[!&]?\d+\>", string)
         # Iterate the mention matches, and resolve them to their names
         d = re.compile("\\d+")
