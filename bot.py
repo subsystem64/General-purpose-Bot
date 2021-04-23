@@ -4,7 +4,6 @@ import json
 from discord import Intents
 from discord.ext import commands
 from discord.ext.commands import NotOwner
-#from alive import alive
 
 #===GET PREFIX FUNCTION===
 
