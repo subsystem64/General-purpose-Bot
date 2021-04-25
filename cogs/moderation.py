@@ -74,7 +74,7 @@ class Moderation(commands.Cog):
 
     @commands.command(aliases=['m'])
     @commands.has_permissions(kick_members = True)
-    @commands.bot_has_permissions(kick_members = True)
+    @commands.bot_has_permissions(manage_roles = True)
     async def mute(self, ctx, member:discord.Member):
         try:
             muted_role = discord.utils.get(member.server.roles, name='Muted')
@@ -87,7 +87,7 @@ class Moderation(commands.Cog):
 
     @commands.command(aliases=['um'])
     @commands.has_permissions(kick_members = True)
-    @commands.bot_has_permissions(kick_members = True)
+    @commands.bot_has_permissions(manage_roles = True)
     async def unmute(self, ctx, member:discord.Member):
         try:
             muted_role = discord.utils.get(member.server.roles, name='Muted')

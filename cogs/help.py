@@ -17,7 +17,7 @@ class Help(commands.Cog):
         colour = discord.Colour.purple()
         )
         embed.set_thumbnail(url = ctx.guild.me.avatar_url)
-        embed.add_field(name = 'Utilities (Misc.) :tools:', value = 'flipacoin, roll, ask, welcome, hi, getprefix', inline=True)
+        embed.add_field(name = 'Utilities (Misc.) :tools:', value = 'flipacoin, roll, ask, welcome, hi, getprefix ', inline=True)
         embed.add_field(name = 'Music :notes:', value = 'join, leave, play, pause, resume, volume, skip, nowplaying, queue, clearqueue, jumpqueue', inline=True)
         embed.add_field(name = 'Moderation', value = 'kick, ban, unban, purge, mute, unmute', inline=True)
         embed.add_field(name = 'Search APIs :mag:', value = 'youtube, wikisearch, wiki', inline=True)
@@ -40,6 +40,7 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&flipacoin', inline=False)
         embed.add_field(name = '**Aliases**', value = 'coinflip', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -51,6 +52,7 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&roll <dice_number>d<dice_size>', inline=False)
         embed.add_field(name = '**Aliases**', value = 'Roll', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -62,6 +64,7 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&ask <question>', inline=False)
         embed.add_field(name = '**Aliases**', value = 'Ask', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -73,6 +76,7 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&welcome', inline=False)
         embed.add_field(name = '**Aliases**', value = 'Welcome', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -84,6 +88,7 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&hi', inline=False)
         embed.add_field(name = '**Aliases**', value = 'Hi', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -95,6 +100,7 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&getprefix', inline=False)
         embed.add_field(name = '**Aliases**', value = 'currentprefix', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages', inline = False)
         await ctx.send(embed = embed)
 
     #moderation commands
@@ -108,6 +114,7 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&kick <@user> <reason>', inline=False)
         embed.add_field(name = '**Aliases**', value = 'k', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages, Kick Members', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -118,6 +125,7 @@ class Help(commands.Cog):
         colour = discord.Colour.gold()
         )
         embed.add_field(name = '**Syntax**', value = '&ban <@user> <reason>', inline=False)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages, Ban Members', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -129,6 +137,7 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&unban <user_ID/username> <reason>', inline=False)
         embed.add_field(name = '**Aliases**', value = 'ub', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages, Ban Members', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -140,6 +149,8 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&mute <user_ID/username>', inline=False)
         embed.add_field(name = '**Aliases**', value = 'm', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages, Manage Roles', inline = False)
+
         await ctx.send(embed = embed)
 
     @help.command()
@@ -151,6 +162,8 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&unmute <user_ID/username>', inline=False)
         embed.add_field(name = '**Aliases**', value = 'um', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages, Manage Roles', inline = False)
+
         await ctx.send(embed = embed)
 
     @help.command()
@@ -162,6 +175,7 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&purge <amount>', inline=False)
         embed.add_field(name = '**Aliases**', value = 'clear, pg, clr', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages, Manage Messages', inline = False)
         await ctx.send(embed = embed)
 
     #search api commands
@@ -175,6 +189,7 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&youtube <search_query>', inline=False)
         embed.add_field(name = '**Aliases**', value = 'yt', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages, Read Messages', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -186,6 +201,7 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&wikisearch <search_query>', inline=False)
         embed.add_field(name = '**Aliases**', value = 'ws', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -197,6 +213,7 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&wiki <article_title>', inline=False)
         embed.add_field(name = '**Aliases**', value = 'wk', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages', inline = False)
         await ctx.send(embed = embed)
 
 #settings commands
@@ -210,6 +227,7 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&setprefix <custom_prefix>', inline=False)
         embed.add_field(name = '**Aliases**', value = 'sp, prefix', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -220,6 +238,7 @@ class Help(commands.Cog):
         colour = discord.Colour.gold()
         )
         embed.add_field(name = '**Syntax**', value = '&autowelcome <boolean_value>', inline=False)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages, Manage Channels', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -230,6 +249,7 @@ class Help(commands.Cog):
         colour = discord.Colour.gold()
         )
         embed.add_field(name = '**Syntax**', value = '&autoroleadd <role_name>', inline=False)
+        embed.add_field(name = '**Required Permissions**', value = 'Manage Roles', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -241,6 +261,7 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&autoroleremove <role_name>', inline=False)
         embed.add_field(name = '**Aliases**', value = 'autorolerm', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Manage Roles', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -251,6 +272,7 @@ class Help(commands.Cog):
         colour = discord.Colour.gold()
         )
         embed.add_field(name = '**Syntax**', value = '&addbanword <word>', inline=False)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages, Manage Messages', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -262,6 +284,7 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&removebanword <word>', inline=False)
         embed.add_field(name = '**Aliases**', value = 'rmbanword', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages, Manage Messages', inline = False)
         await ctx.send(embed = embed)
 
     #debug commands
@@ -274,6 +297,7 @@ class Help(commands.Cog):
         colour = discord.Colour.gold()
         )
         embed.add_field(name = '**Syntax**', value = '&load <extension_name>', inline=False)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -284,6 +308,7 @@ class Help(commands.Cog):
         colour = discord.Colour.gold()
         )
         embed.add_field(name = '**Syntax**', value = '&unload <extension_name>', inline=False)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -294,6 +319,7 @@ class Help(commands.Cog):
         colour = discord.Colour.gold()
         )
         embed.add_field(name = '**Syntax**', value = '&reload <extension_name>', inline=False)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -304,6 +330,7 @@ class Help(commands.Cog):
         colour = discord.Colour.gold()
         )
         embed.add_field(name = '**Syntax**', value = '&botstats', inline=False)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -314,6 +341,7 @@ class Help(commands.Cog):
         colour = discord.Colour.gold()
         )
         embed.add_field(name = '**Syntax**', value = '&ping', inline=False)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -324,6 +352,7 @@ class Help(commands.Cog):
         colour = discord.Colour.gold()
         )
         embed.add_field(name = '**Syntax**', value = '&shutdown', inline=False)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -334,6 +363,7 @@ class Help(commands.Cog):
         colour = discord.Colour.gold()
         )
         embed.add_field(name = '**Syntax**', value = '&uptime', inline=False)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages', inline = False)
         await ctx.send(embed = embed)
 
     #music commands
@@ -346,6 +376,7 @@ class Help(commands.Cog):
         colour = discord.Colour.gold()
         )
         embed.add_field(name = '**Syntax**', value = '&join', inline=False)
+        embed.add_field(name = '**Required Permissions**', value = 'Connect', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -357,6 +388,7 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&leave', inline=False)
         embed.add_field(name = '**Aliases**', value = 'disconnect', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Connect', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -367,6 +399,7 @@ class Help(commands.Cog):
         colour = discord.Colour.gold()
         )
         embed.add_field(name = '**Syntax**', value = '&play <video_url/query>', inline=False)
+        embed.add_field(name = '**Required Permissions**', value = 'Speak, Connect, Add Reactions', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -378,6 +411,7 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&pause', inline=False)
         embed.add_field(name = '**Aliases**', value = 'p', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Speak, Connect, Add Reactions', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -388,6 +422,7 @@ class Help(commands.Cog):
         colour = discord.Colour.gold()
         )
         embed.add_field(name = '**Syntax**', value = '&resume', inline=False)
+        embed.add_field(name = '**Required Permissions**', value = 'Speak, Connect, Add Reactions', inline = False)
         await ctx.send(embed = embed)
     
     @help.command()
@@ -399,16 +434,18 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&volume <value>', inline=False)
         embed.add_field(name = '**Aliases**', value = 'v', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Speak, Connect, Add Reactions', inline = False)
         await ctx.send(embed = embed)
     
     @help.command()
     async def skip(self, ctx):
         embed = discord.Embed(
-        title="skip", 
+        title="skip :fast_forward:", 
         description="Skips or votes to skip the current track.", 
         colour = discord.Colour.gold()
         )
         embed.add_field(name = '**Syntax**', value = '&skip', inline=False)
+        embed.add_field(name = '**Required Permissions**', value = 'Speak, Connect, Add Reactions', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -420,6 +457,7 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&nowplaying', inline=False)
         embed.add_field(name = '**Aliases**', value = 'np', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Speak, Connect, Add Reactions', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -431,6 +469,7 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&queue', inline=False)
         embed.add_field(name = '**Aliases**', value = 'q,playlist', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Speak, Connect, Add Reactions', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -442,6 +481,7 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&clearqueue', inline=False)
         embed.add_field(name = '**Aliases**', value = 'q,playlist', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Speak, Connect, Add Reactions', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -453,6 +493,7 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = '&jumpqueue <index> <new_index>', inline=False)
         embed.add_field(name = '**Aliases**', value = 'jq', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Speak, Connect, Add Reactions', inline = False)
         await ctx.send(embed = embed)
 
     #translate commands
@@ -466,6 +507,7 @@ class Help(commands.Cog):
         )
         embed.add_field(name = '**Syntax**', value = 'tr [words] <from lang_code (optional)> <to lang_code>', inline=False)
         embed.add_field(name = '**Aliases**', value = 'tr', inline=True)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages', inline = False)
         await ctx.send(embed = embed)
     
     @help.command()
@@ -476,6 +518,7 @@ class Help(commands.Cog):
         colour = discord.Colour.gold()
         )
         embed.add_field(name = '**Syntax**', value = '&langlist', inline=False)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages', inline = False)
         await ctx.send(embed = embed)
 
     @help.command()
@@ -486,6 +529,7 @@ class Help(commands.Cog):
         colour = discord.Colour.gold()
         )
         embed.add_field(name = '**Syntax**', value = '&detectlang <phrase>', inline=False)
+        embed.add_field(name = '**Required Permissions**', value = 'Send Messages', inline = False)
         await ctx.send(embed = embed)
 
     
